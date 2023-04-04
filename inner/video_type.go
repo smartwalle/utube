@@ -1,22 +1,6 @@
 package inner
 
-type ClientType string
-
-const (
-	ClientTypeWeb          ClientType = "WEB"
-	ClientTypeWebEmbed     ClientType = "WEB_EMBED"
-	ClientTypeAndroid      ClientType = "ANDROID"
-	ClientTypeAndroidEmbed ClientType = "ANDROID_EMBED"
-)
-
-var clients = map[ClientType]string{
-	ClientTypeWeb:          `{"context": {"client": {"clientName": "WEB","clientVersion": "2.20200720.00.02"}},"videoId": "%s"}`,
-	ClientTypeWebEmbed:     `{"context": {"client": {"clientName": "WEB","clientVersion": "2.20210721.00.00", "clientScreen": "EMBED"}},"videoId": "%s"}`,
-	ClientTypeAndroid:      `{"context": {"client": {"clientName": "ANDROID","clientVersion": "16.20"}},"videoId": "%s"}`,
-	ClientTypeAndroidEmbed: `{"context": {"client": {"clientName": "ANDROID","clientVersion": "16.20","clientScreen": "EMBED"}},"videoId": "%s"}`,
-}
-
-type PlayerInfo struct {
+type VideoMeta struct {
 	ResponseContext   *ResponseContext   `json:"responseContext"`
 	PlayabilityStatus *PlayabilityStatus `json:"playabilityStatus"`
 	StreamingData     *StreamingData     `json:"streamingData"`
