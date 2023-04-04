@@ -104,7 +104,7 @@ type WatchEndpoint struct {
 }
 
 type WatchEndpointSupportedOnesieConfig struct {
-	Html5PlaybackOnesieConfig *HTML5PlaybackOnesieConfig `json:"html5PlaybackOnesieConfig"`
+	HTML5PlaybackOnesieConfig *HTML5PlaybackOnesieConfig `json:"html5PlaybackOnesieConfig"`
 }
 
 type HTML5PlaybackOnesieConfig struct {
@@ -455,6 +455,7 @@ type StreamingData struct {
 	ExpiresInSeconds string    `json:"expiresInSeconds"`
 	Formats          []*Format `json:"formats"`
 	AdaptiveFormats  []*Format `json:"adaptiveFormats"`
+	ProbeURL         string    `json:"probeUrl"`
 }
 
 type Format struct {
