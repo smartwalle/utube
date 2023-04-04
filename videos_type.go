@@ -27,7 +27,7 @@ type GetVideosParam struct {
 	PageToken  string
 }
 
-func (this GetVideosParam) Params() url.Values {
+func (this GetVideosParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())
@@ -157,7 +157,7 @@ type GetVideoCategoriesParam struct {
 	HL string
 }
 
-func (this GetVideoCategoriesParam) Params() url.Values {
+func (this GetVideoCategoriesParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())

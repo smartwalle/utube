@@ -1,37 +1,37 @@
-package utube
+package utube_test
 
 import (
-	"fmt"
+	"github.com/smartwalle/utube"
 	"testing"
 )
 
 func TestYoutube_GetVideos(t *testing.T) {
-	fmt.Println("=====Videos=====")
+	t.Log("========== Videos ==========")
 	var c = GetYoutube()
-	var p = GetVideosParam{}
+	var p = utube.GetVideosParam{}
 	p.Chart = "mostPopular"
 	var vs, err = c.GetVideos(p)
 	if err != nil {
-		fmt.Println(err)
+		t.Fatal(err)
 		return
 	}
 	for _, v := range vs.Items {
-		fmt.Println(v.Id, v.Snippet.Title, v.Snippet.Thumbnails.GetThumbnailURL())
+		t.Log(v.Id, v.Snippet.Title, v.Snippet.Thumbnails.GetThumbnailURL())
 	}
 }
 
 func TestYoutube_GetVideoCategories(t *testing.T) {
-	fmt.Println("=====Video Categories=====")
+	t.Log("========== Video Categories ==========")
 	var c = GetYoutube()
-	var p = GetVideoCategoriesParam{}
+	var p = utube.GetVideoCategoriesParam{}
 	p.RegionCode = "US"
 	p.HL = "zh_CN"
 	var vs, err = c.GetVideoCategories(p)
 	if err != nil {
-		fmt.Println(err)
+		t.Fatal(err)
 		return
 	}
 	for _, v := range vs.Items {
-		fmt.Println(v.Snippet.ChannelId, v.Snippet.Title)
+		t.Log(v.Snippet.ChannelId, v.Snippet.Title)
 	}
 }

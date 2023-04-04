@@ -1,21 +1,23 @@
 package utube
 
-import (
-	"fmt"
-	"github.com/smartwalle/ngx"
-)
+import "fmt"
 
 type ResponseError struct {
-	Response *ngx.Response `json:"-"`
-	RepError struct {
-		Errors  []*ErrorInfo `json:"errors"`
-		Code    int          `json:"code"`
-		Message string       `json:"message"`
-	} `json:"error"`
+	Method  string
+	URL     string
+	Content *Error `json:"error"`
 }
 
 func (this *ResponseError) Error() string {
-	return fmt.Sprintf("[%s]%d %s [Message]%s", this.Response.Request().Method, this.Response.StatusCode(), this.Response.Request().URL, this.RepError.Message)
+	return fmt.Sprintf("[%s-%s] %s", this.Method, this.URL, this.Content.Message)
+}
+
+type Error struct {
+	Code    int            `json:"code"`
+	Message string         `json:"message"`
+	Errors  []*ErrorInfo   `json:"errors"`
+	Status  string         `json:"status"`
+	Details []*ErrorDetail `json:"details,omitempty"`
 }
 
 type ErrorInfo struct {
@@ -24,4 +26,16 @@ type ErrorInfo struct {
 	Message      string `json:"message"`
 	LocationType string `json:"locationType"`
 	Location     string `json:"location"`
+}
+
+type ErrorDetail struct {
+	Type     string         `json:"@type"`
+	Reason   string         `json:"reason"`
+	Domain   string         `json:"domain"`
+	Metadata *ErrorMetadata `json:"metadata,omitempty"`
+}
+
+type ErrorMetadata struct {
+	Service  string `json:"service"`
+	Consumer string `json:"consumer"`
 }

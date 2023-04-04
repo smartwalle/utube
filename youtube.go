@@ -1,6 +1,7 @@
 package utube
 
 import (
+	"context"
 	"github.com/smartwalle/ngx"
 	"net/http"
 	"strings"
@@ -44,68 +45,33 @@ func (this *Client) BuildAPI(paths ...string) string {
 }
 
 func (this *Client) doRequest(method, url string, param Param, result interface{}) (err error) {
-	//var (
-	//req  *http.Request
-	//rep  *http.Response
-	//data []byte
-	//)
-
-	var v = param.Params()
-	if len(this.key) > 0 {
-		v.Add("key", this.key)
+	var values = param.Values()
+	if this.key != "" {
+		values.Add("key", this.key)
 	}
 
-	req := ngx.NewRequest(method, url)
-	req.SetParams(v)
+	var req = ngx.NewRequest(method, url)
+	req.SetParams(values)
 	if this.accessToken != "" {
 		req.SetHeader("Authorization", "Bearer "+this.accessToken)
 	}
 
-	rep := req.Exec()
+	rsp := req.Exec(context.Background())
 
-	//req, err = request.NewRequest(method, url, v)
-	//if err != nil {
-	//	return err
-	//}
-	//if this.accessToken != "" {
-	//	req.Header.Add("Authorization", "Bearer " + this.accessToken)
-	//}
-	//
-	//rep, err = http.DefaultClient.Do(req)
-	//if err != nil {
-	//	return err
-	//}
-	//defer rep.Body.Close()
-	//
-	//data, err = ioutil.ReadAll(rep.Body)
-	//if err != nil {
-	//	return err
-	//}
-
-	switch rep.StatusCode() {
+	switch rsp.StatusCode() {
 	case http.StatusOK:
-		if result != nil {
-			//if err = json.Unmarshal(data, result); err != nil {
-			//	return err
-			//}
-			if err = rep.UnmarshalJSON(result); err != nil {
-				return err
-			}
+		if err = rsp.UnmarshalJSON(result); err != nil {
+			return err
 		}
 	default:
-		var e = &ResponseError{}
-		e.Response = rep
-		if len(rep.MustBytes()) > 0 {
-			if err = rep.UnmarshalJSON(e); err != nil {
-				return err
-			}
+		var rErr *ResponseError
+		if err = rsp.UnmarshalJSON(&rErr); err != nil {
+			return err
 		}
-		//if len(data) > 0 {
-		//	if err = json.Unmarshal(data, e); err != nil {
-		//		return err
-		//	}
-		//}
-		return e
+
+		rErr.Method = method
+		rErr.URL = rsp.Request().URL.String()
+		return rErr
 	}
-	return err
+	return nil
 }

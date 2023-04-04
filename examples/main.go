@@ -13,7 +13,7 @@ var client *utube.Client
 var db *sql.DB
 
 func init() {
-	client = utube.New("AIzaSyAeDwd1bXWY7Z86YxEqBTSOBNkbBfkM5i4", "")
+	client = utube.New("AIzaSyC8tmV8M2dgVtrvOhkeYxqhWEkXyl5XhW8", "")
 
 	db, _ = sql.Open("mysql", "xxx")
 }

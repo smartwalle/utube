@@ -45,7 +45,7 @@ type SearchParam struct {
 	PageToken  string
 }
 
-func (this SearchParam) Params() url.Values {
+func (this SearchParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())

@@ -1,42 +1,42 @@
-package utube
+package utube_test
 
 import (
-	"fmt"
+	"github.com/smartwalle/utube"
 	"testing"
 )
 
 func TestYoutube_GetCommentThreads(t *testing.T) {
-	fmt.Println("=====CommentThreads=====")
+	t.Log("========== GetCommentThreads ==========")
 	var c = GetYoutube()
-	var p = GetCommentThreadsParam{}
+	var p = utube.GetCommentThreadsParam{}
 	p.Part.ShowSnippet()
 	p.Part.ShowReplies()
-	p.VideoId = "S5eFdckiA-c"
+	p.VideoId = "OtmWv_cgZqk"
 	var cts, err = c.GetCommentThreads(p)
 	if err != nil {
-		fmt.Println(err)
+		t.Fatal(err)
 		return
 	}
 	for _, c := range cts.Items {
-		fmt.Println(c.Id, c.Kind)
+		t.Log(c.Id, c.Kind)
 	}
 }
 
 func TestYoutube_GetComments(t *testing.T) {
-	fmt.Println("=====Comments=====")
+	t.Log("========== GetComments ==========")
 	var c = GetYoutube()
-	var p = GetCommentsParams{}
+	var p = utube.GetCommentsParams{}
 	p.Part.ShowSnippet()
-	p.AppendId("z23libhysym5wndzr04t1aokgeo4euvmqqjrd42ynhe4bk0h00410")
-	p.AppendId("z22fwzvzauj2vlweracdp433sp4uf4sddechmmbwvvlw03c010c")
+	p.AppendId("UgzkzMAiQ9qi_-syaBN4AaABAg")
+	p.AppendId("Ugxh6h4yTi99QJF_wxd4AaABAg")
 
 	var cs, err = c.GetComments(p)
 	if err != nil {
-		fmt.Println(err)
+		t.Fatal(err)
 		return
 	}
 
 	for _, c := range cs.Items {
-		fmt.Println(c.Id, c.Snippet.TextDisplay)
+		t.Log(c.Id, c.Snippet.TextDisplay)
 	}
 }

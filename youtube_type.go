@@ -6,7 +6,7 @@ import (
 )
 
 type Param interface {
-	Params() url.Values
+	Values() url.Values
 }
 
 type Part struct {

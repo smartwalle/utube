@@ -24,7 +24,7 @@ type GetPlaylistsParam struct {
 	PageToken  string
 }
 
-func (this GetPlaylistsParam) Params() url.Values {
+func (this GetPlaylistsParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())
@@ -105,7 +105,7 @@ type PlaylistContentDetails struct {
 	ItemCount int `json:"itemCount"`
 }
 
-// https://developers.google.cn/youtube/v3/docs/playlistItems/list
+// GetPlaylistItemsParam https://developers.google.cn/youtube/v3/docs/playlistItems/list
 type GetPlaylistItemsParam struct {
 	// Required parameters
 	Part Part
@@ -122,7 +122,7 @@ type GetPlaylistItemsParam struct {
 	PageToken  string
 }
 
-func (this GetPlaylistItemsParam) Params() url.Values {
+func (this GetPlaylistItemsParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())

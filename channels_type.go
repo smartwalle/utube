@@ -26,7 +26,7 @@ type GetChannelsParam struct {
 	PageToken  string
 }
 
-func (this GetChannelsParam) Params() url.Values {
+func (this GetChannelsParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())

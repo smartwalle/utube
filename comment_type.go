@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// https://developers.google.cn/youtube/v3/docs/commentThreads/list
+// GetCommentThreadsParam https://developers.google.cn/youtube/v3/docs/commentThreads/list
 type GetCommentThreadsParam struct {
 	// Required parameters
 	Part Part
@@ -26,7 +26,7 @@ type GetCommentThreadsParam struct {
 	TextFormat       string
 }
 
-func (this GetCommentThreadsParam) Params() url.Values {
+func (this GetCommentThreadsParam) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())
@@ -73,7 +73,7 @@ func (this GetCommentThreadsParam) Params() url.Values {
 	return v
 }
 
-// https://developers.google.cn/youtube/v3/docs/comments/list
+// GetCommentsParams https://developers.google.cn/youtube/v3/docs/comments/list
 type GetCommentsParams struct {
 	// Required parameters
 	Part Part
@@ -92,7 +92,7 @@ func (this *GetCommentsParams) AppendId(id string) {
 	this.Ids = append(this.Ids, id)
 }
 
-func (this GetCommentsParams) Params() url.Values {
+func (this GetCommentsParams) Values() url.Values {
 	var v = url.Values{}
 
 	v.Add("part", this.Part.Values())

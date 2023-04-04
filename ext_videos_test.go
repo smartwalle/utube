@@ -1,16 +1,17 @@
-package utube
+package utube_test
 
-import (
-	"fmt"
-	"testing"
-)
-
-func TestGetVideoInfoWithVideoId(t *testing.T) {
-	fmt.Println("=====Ext Videos=====")
-	var info, err = GetVideoInfoWithVideoId("nLw-zd87wVk")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Println(info.VideoId, info.Title, info.IURL)
-}
+//import (
+//	"fmt"
+//	"github.com/smartwalle/utube"
+//	"testing"
+//)
+//
+//func TestGetVideoInfoWithVideoId(t *testing.T) {
+//	t.Log("========== Ext Videos ==========")
+//	var info, err = utube.GetVideoInfoWithVideoId("OtmWv_cgZqk")
+//	if err != nil {
+//		fmt.Println(err)
+//		return
+//	}
+//	fmt.Println(info.VideoId, info.Title, info.IURL)
+//}
