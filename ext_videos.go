@@ -13,10 +13,10 @@ package utube
 //)
 //
 //func GetVideoInfoWithVideoId(videoId string) (videoInfo *VideoInfo, err error) {
-//	var req = ngx.NewRequest("GET", kGetVideoInfoURL)
+//	var req = ngx.NewRequest(http.MethodGet, kGetVideoInfoURL)
 //	req.SetParam("video_id", videoId)
 //
-//	//result, err := request.Request("GET", kGetVideoInfoURL, url.Values{"video_id": []string{videoId}})
+//	//result, err := request.Request(http.MethodGet, kGetVideoInfoURL, url.Values{"video_id": []string{videoId}})
 //	//if err != nil {
 //	//	return nil, err
 //	//}
