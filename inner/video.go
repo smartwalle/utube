@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	kGetVideoURL = "https://www.youtube.com/youtubei/v1/player"
+	kGetVideoMetaURL = "https://www.youtube.com/youtubei/v1/player"
 )
 
 // GetVideoMeta 获取视频信息
@@ -23,7 +23,7 @@ const (
 // AIzaSyCjc_pVEDi4qsv5MtC2dMXzpIaDoRFLsxw
 // AIzaSyDHQ9ipnphqTzDqZsbtd8_Ru4_kiKVQe2k
 func GetVideoMeta(key, videoId string) (videoMeta *VideoMeta, err error) {
-	var req = ngx.NewRequest(http.MethodPost, kGetVideoURL)
+	var req = ngx.NewRequest(http.MethodPost, kGetVideoMetaURL)
 	req.AddQuery("key", key)
 
 	req.SetContentType(ngx.ContentTypeJSON)
