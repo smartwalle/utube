@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	k_YOUTUBE_API_URL = "https://www.googleapis.com/youtube"
+	kYoutubeBaseURL = "https://www.googleapis.com/youtube"
 )
 
 type Client struct {
@@ -21,7 +21,7 @@ func New(key, accessToken string) (client *Client) {
 	client = &Client{}
 	client.key = key
 	client.accessToken = accessToken
-	client.apiDomain = k_YOUTUBE_API_URL
+	client.apiDomain = kYoutubeBaseURL
 	return client
 }
 
