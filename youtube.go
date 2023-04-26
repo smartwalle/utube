@@ -12,17 +12,18 @@ const (
 )
 
 type Client struct {
+	Client      *http.Client
 	key         string
 	accessToken string
 	apiDomain   string
 }
 
-func New(key, accessToken string) (client *Client) {
-	client = &Client{}
-	client.key = key
-	client.accessToken = accessToken
-	client.apiDomain = kYoutubeBaseURL
-	return client
+func New(key, accessToken string) *Client {
+	var nClient = &Client{}
+	nClient.key = key
+	nClient.accessToken = accessToken
+	nClient.apiDomain = kYoutubeBaseURL
+	return nClient
 }
 
 func (this *Client) BuildAPI(paths ...string) string {
@@ -50,7 +51,7 @@ func (this *Client) doRequest(method, url string, param Param, result interface{
 		values.Add("key", this.key)
 	}
 
-	var req = ngx.NewRequest(method, url)
+	var req = ngx.NewRequest(method, url, ngx.WithClient(this.Client))
 	req.SetParams(values)
 	if this.accessToken != "" {
 		req.SetHeader("Authorization", "Bearer "+this.accessToken)
