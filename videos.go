@@ -3,13 +3,13 @@ package utube
 import "net/http"
 
 const (
-	kVideoAPI        = "/v3/videos"
+	kVideo           = "/v3/videos"
 	kVideoCategories = "/v3/videoCategories"
 )
 
 // GetVideos https://developers.google.cn/youtube/v3/docs/videos/list
 func (this *Client) GetVideos(param GetVideosParam) (results *Videos, err error) {
-	var api = this.BuildAPI(kVideoAPI)
+	var api = this.BuildAPI(kVideo)
 	err = this.doRequest(http.MethodGet, api, param, &results)
 	return results, err
 }

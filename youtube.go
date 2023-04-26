@@ -8,26 +8,26 @@ import (
 )
 
 const (
-	kYoutubeBaseURL = "https://www.googleapis.com/youtube"
+	kYoutube = "https://www.googleapis.com/youtube"
 )
 
 type Client struct {
 	Client      *http.Client
 	key         string
 	accessToken string
-	apiDomain   string
+	host        string
 }
 
 func New(key, accessToken string) *Client {
 	var nClient = &Client{}
 	nClient.key = key
 	nClient.accessToken = accessToken
-	nClient.apiDomain = kYoutubeBaseURL
+	nClient.host = kYoutube
 	return nClient
 }
 
 func (this *Client) BuildAPI(paths ...string) string {
-	var path = this.apiDomain
+	var path = this.host
 	for _, p := range paths {
 		p = strings.TrimSpace(p)
 		if len(p) > 0 {
